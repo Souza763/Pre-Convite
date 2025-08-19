@@ -1,0 +1,261 @@
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #fdfdfb;
+  color: #333;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(270deg, #fdfdfb, #ffeddc, #f8dec1b7);
+  background-size: 600% 600%;
+  animation: fundoGradiente 10s ease infinite;
+  position: relative;
+  overflow: hidden; /* evita barras de rolagem */
+}
+@keyframes fundoGradiente {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+  .formulario {
+    width: 90%;
+  }
+}
+header {
+  padding: 40px 20px 20px;
+}
+header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  color: #5c3d2e; /* marrom elegante */
+  margin-bottom: 5px;
+}
+header p {
+  font-size: 1rem;
+  color: #5c3d2e;
+  font-family: sans-serif;
+}
+.formulario {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: transparent;
+  border-radius: 10px;
+}
+h2 {
+  font-family: sans-serif;
+}
+main h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  color: #5c3d2e;
+  margin-bottom: 20px;
+}
+input,
+button {
+  font-family: inherit;
+  padding: 10px 15px;
+  margin: 10px 5px;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+input {
+  width: 70%;
+}
+input[type="text"] {
+  width: 70%;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.4s ease;
+}
+input[type="text"]:focus {
+  border-color: #d4af37; /* dourado elegante */
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  background-color: #fffaf0;
+  transform: scale(1.02); /* cresce levemente */
+}
+button {
+  background: #5c3d2e;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+} /* Caixa de mensagens */
+#mensagens {
+  display: none;
+  margin: 20px auto;
+  padding: 12px;
+  width: 80%;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+}
+.bolha {
+  position: absolute;
+  bottom: -60px;
+  background: rgba(255, 215, 0, 0.4); /* dourado translúcido */
+  border-radius: 50%;
+  animation: subir 15s linear infinite;
+  animation-delay: -5s; /* começa já 5s adiantado */
+  transform: translateY(500px);
+}
+@keyframes subir {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 3;
+  }
+  100% {
+    transform: translateY(-120vh) scale(4);
+    opacity: 0;
+  }
+} /* Caixa de formulário */
+#formulario {
+  display: inline-block;
+  opacity: 0; /* invisível no início */
+  transform: translateX(-100%); /* fora da tela à esquerda */
+  animation: slideForm 1.2s ease forwards; /* VELOCIDADE DA CAIXA */
+  animation-delay: 0.5s; /* atraso antes de começar */
+} /* Input dentro da caixa */
+#nome {
+  width: 70%;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.4s ease;
+  opacity: 0; /* invisível no início */
+  transform: translateX(-100%); /* texto inicia fora */
+  animation: slideText 1s ease forwards; /* VELOCIDADE DO TEXTO */
+  animation-delay: 1.7s; /* espera a caixa aparecer */
+} /* Focus elegante */
+#nome:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  background-color: #fffaf0;
+  transform: scale(1.02);
+} /* Animação da caixa entrando + fade-in */
+@keyframes slideForm {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+} /* Animação do texto interno + fade-in */
+@keyframes slideText {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  border: 2px solid #5c3d2e;
+  border-radius: 8px;
+  background: transparent; /* sem fundo */
+  color: #5c3d2e;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  opacity: 0; /* invisível no início */ /* Remove efeitos padrões do navegador */ /* Transição suave para o "pulo" */
+  transition: transform 0.2s ease;
+} /* Efeito pulo no hover */
+button:hover {
+  transform: scale(1.08); /* aumenta 8% do tamanho */
+} /* Animação de entrada dos botões */
+button#confirmar {
+  transform: translateX(100%);
+  animation: entrarDireita 1s ease forwards;
+  animation-delay: 2s;
+}
+button#naoConfirmar {
+  transform: translateX(-100%);
+  animation: entrarEsquerda 1s ease forwards;
+  animation-delay: 2s;
+} /* Keyframes de entrada */
+@keyframes entrarDireita {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes entrarEsquerda {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+#carta {
+  width: 90%;
+  max-width: 600px; /* limite de largura */
+  margin: 20px auto;
+  padding: 30px 20px; /* espaço interno */
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 2px solid #d4af37;
+  box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  box-sizing: border-box; /* garante que padding não quebre a largura */
+} /* Responsivo: telas menores que 600px */
+@media screen and (max-width: 600px) {
+  #carta {
+    width: 95%; /* ocupa quase toda a tela, mas com margem */
+    padding: 20px 15px; /* reduz padding interno */
+  }
+  #formulario {
+    width: 100%; /* form ocupa toda a largura da carta */
+  }
+  #nome {
+    width: 100%; /* input ocupa toda a largura disponível */
+  }
+  button {
+    width: 100%; /* botões ocupam toda a largura da carta */
+    margin-top: 10px;
+  }
+  header,
+  h1,
+  h2,
+  p {
+    width: 100%; /* textos também se ajustam */
+    text-align: center; /* centraliza conteúdo textual */
+  }
+}
+#nome {
+  width: 80%; /* ocupa toda a largura disponível da carta */
+  max-width: 400px; /* não fica maior que 400px em telas grandes */
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.4s ease;
+}
