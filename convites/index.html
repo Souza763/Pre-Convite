@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmação de Presença</title>
+    <link rel="stylesheet" href="estilo.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="carta">
+      <header>
+        <h1>Gustavo & Ana Luiza</h1>
+        <p>
+          Venham comemoprar junto a nós nossa celebração de noivado, convidamos
+          você a participar deste dia importante em nossa história!!
+        </p>
+      </header>
+      <div class="formulario">
+        <h2>Confirme sua presença</h2>
+        <input type="text" id="nome" placeholder="Digite seu nome" />
+        <br />
+        <button id="confirmar" onclick="enviarResposta(true)">
+          Confirmar Presença
+        </button>
+        <button id="naoConfirmar" onclick="enviarResposta(false)">
+          Não poderei comparecer
+        </button>
+      </div>
+    </div>
+    <div
+      id="mensagens"
+      style="
+        display: none;
+        margin: 15px auto;
+        padding: 10px;
+        width: 80%;
+        border-radius: 8px;
+        font-weight: bold;
+        text-align: center;
+      "
+    ></div>
+
+    <div id="bolhas"></div>
+
+    <script>
+      function showMessage(texto, tipo = "info") {
+        const msg = document.getElementById("mensagens");
+        msg.textContent = texto;
+
+        // Reset estilos
+        msg.style.display = "block";
+        msg.style.background = "";
+        msg.style.color = "";
+        msg.style.border = "";
+
+        // Aplica cores diferentes conforme o tipo
+        if (tipo === "success") {
+          msg.style.background = "";
+          msg.style.color = "#155724";
+          msg.style.border = "";
+        } else if (tipo === "error") {
+          msg.style.background = "";
+          msg.style.color = "#721c24";
+          msg.style.border = "";
+        } else {
+          msg.style.background = "#cce5ff";
+          msg.style.color = "#004085";
+          msg.style.border = "1px solid #b8daff";
+        }
+
+        // Some sozinho depois de 3s
+        setTimeout(() => {
+          msg.style.display = "none";
+        }, 3000);
+      }
+      const API_URL =
+        "https://script.google.com/macros/s/AKfycbxgDmxT87zA0Hww7GHP6A-JpZ_XFu-LhArTWlZ3nhcwSq29D8pED1K-zLF00OtAnZwyoQ/exec"; // 👈 troque pelo seu link
+
+      async function enviarResposta(presenca) {
+        const nome = document.getElementById("nome").value;
+        if (!nome) {
+          alert("Digite seu nome!");
+          return;
+        }
+
+        try {
+          const url = `${API_URL}?nome=${encodeURIComponent(
+            nome
+          )}&presenca=${presenca}`;
+          const resposta = await fetch(url);
+          const dados = await resposta.json();
+
+          console.log("Resposta:", dados);
+          showMessage("Recebemos sua resposta, obrigado!!", "success");
+          document.getElementById("nome").value = "";
+        } catch (erro) {
+          console.error("Erro:", erro);
+          showMessage("Infelizmente ocorreu um erro, tente novamente", "error");
+        }
+      }
+      const container = document.getElementById("bolhas");
+
+      for (let i = 0; i < 20; i++) {
+        const bolha = document.createElement("div");
+        bolha.classList.add("bolha");
+
+        // tamanho aleatório
+        const size = Math.random() * 12 + 6; // entre 6px e 18px
+        bolha.style.width = `${size}px`;
+        bolha.style.height = `${size}px`;
+
+        // posição aleatória no eixo X
+        bolha.style.left = `${Math.random() * 100}vw`;
+
+        // tempo e delay diferentes
+        bolha.style.animationDuration = `${10 + Math.random() * 10}s`;
+        bolha.style.animationDelay = `${Math.random() * 20}s`;
+
+        container.appendChild(bolha);
+      }
+    </script>
+  </body>
+</html>
